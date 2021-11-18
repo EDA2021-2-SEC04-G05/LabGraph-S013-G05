@@ -30,6 +30,7 @@ import config
 import threading
 from App import controller
 from DISClib.ADT import stack
+from timeit import default_timer
 assert config
 
 """
@@ -83,8 +84,10 @@ def optionThree(cont):
 
 
 def optionFour(cont, initialStation):
+    inicial = default_timer()
     controller.minimumCostPaths(cont, initialStation)
-
+    final = default_timer()
+    print('Tiempo de ejecución:' + str(final - inicial))
 
 def optionFive(cont, destStation):
     haspath = controller.hasPath(cont, destStation)
@@ -94,6 +97,7 @@ def optionFive(cont, destStation):
 
 
 def optionSix(cont, destStation):
+    inicial = default_timer()
     path = controller.minimumCostPath(cont, destStation)
     if path is not None:
         pathlen = stack.size(path)
@@ -103,7 +107,8 @@ def optionSix(cont, destStation):
             print(stop)
     else:
         print('No hay camino')
-
+    final = default_timer()
+    print('Tiempo de ejecución:' + str(final - inicial))
 
 def optionSeven(cont):
     maxvert, maxdeg = controller.servedRoutes(cont)
